@@ -1,10 +1,12 @@
 # BypassLoad
 **通过远程加载AES + XOR异或加密shellcode的加载器，无过多技术细节。**
 
-| shellcode | 360杀毒    | 火绒 | Defender | 腾讯电脑管家 |
-| --------- | -----------| --- | -------  | ----------- | 
-| meterpreter  | √       |   √ |          | √           | 
-| Cobalt Strike|         |   √ |          | √           |
+| shellcode | 360杀毒    | 火绒 | Defender | 腾讯电脑管家 | VT |
+| --------- | -----------| --- | -------  | ------------- |  --  |
+| meterpreter  | √       |   √ |          | √           |  15/69  |
+| Cobalt Strike| 静态√   |   √ |          | √           |   15/69 |
+
+360在远程加载shellcode时可能被拦截
 
 ## 声明：
 1. 文中所涉及的技术、思路和工具仅供以安全为目的的学习交流使用，任何人不得将其用于非法用途以及盈利等目的，否则后果自行承担！
@@ -18,4 +20,10 @@
 3. 将远程访问链接写入webpath.txt
 4. 运行BypassLoad.exe
 
-![IMAGE](/image/logo.png)
+<p align="center"">
+  <img src="https://github.com/Mangofang/BypassLoad/blob/main/image/%7BCFE2B5D0-BF30-4063-9ADC-6426314F6132%7D.png">
+</p>
+
+<p align="center">
+  <img src="https://github.com/Mangofang/BypassLoad/blob/main/image/%7BAB76D9F0-6FF6-424c-BA8C-5AC09209FF61%7D.png">
+</p>
