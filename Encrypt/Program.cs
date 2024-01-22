@@ -14,7 +14,7 @@ namespace Encrypt
         {
             string path = System.AppDomain.CurrentDomain.SetupInformation.ApplicationBase;
             string shellcode = File.ReadAllText(path + "shellcode.txt", Encoding.UTF8);
-            shellcode = new string(xoe(shellcode));
+            shellcode = new string(xor(shellcode));
             string D_shellcode = AesEncrypt(shellcode, "BsijVUv2v+Ql/NM3pQv8uQ==");
             /*using (Aes aes = Aes.Create())
             {
@@ -25,7 +25,7 @@ namespace Encrypt
             Console.WriteLine(D_shellcode);
             Console.ReadLine();
         }
-        private static char[] xoe(string str)
+        private static char[] xor(string str)
         {
             char[] data = str.ToArray();
             char[] key = "qwertyuiopasdfghjklzxcvbnm".ToArray();
