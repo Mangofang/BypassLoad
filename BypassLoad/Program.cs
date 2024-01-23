@@ -17,11 +17,6 @@ namespace TCPMeterpreterProcess
             internal static extern IntPtr GetProcAddress(IntPtr hModule, string procname);
             [DllImport("Kernel32")]
             internal static extern IntPtr LoadLibrary(string moduleName);
-            internal delegate UInt32 Virtual_Alloc(
-            UInt32 lpStartAddr,
-            UInt32 size,
-            UInt32 flAllocationType,
-            UInt32 flProtect);
         }
         internal delegate UInt32 Virtual_Alloc(
             UInt32 lpStartAddr,
