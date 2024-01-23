@@ -3,8 +3,8 @@
 
 | shellcode | 360杀毒    | 火绒 | Defender | 腾讯电脑管家 | VT |
 | --------- | -----------| --- | -------  | ------------- |  --  |
-| Meterpreter  | √       |   √ |          | √           |  15/69  |
-| Cobalt Strike| 静态√   |   √ |          | √           |   15/69 |
+| Meterpreter  | √       |   √ |    √      | √           |  13/69  |
+| Cobalt Strike| 静态√   |   √ |    √      | √           |   13/69 |
 
 推荐Meterpreter生成shellcode，Cobalt Strike在尝试远程加载的shellcode时可能被360拦截
 
@@ -21,6 +21,12 @@
 2. 将Encrypt.exe加密编码后的数据上传至服务器
 3. 将远程访问链接写入webpath.txt
 4. 运行BypassLoad.exe
+
+## 更新
+2024年01月24日
+  1. 效果优化，现已免杀Defender
+  2. 现在基于.NET Framework4.7.2框架
+  3. 移除了一段无效代码
 
 <p align="center"">
   <img src="https://github.com/Mangofang/BypassLoad/blob/main/image/%7BCFE2B5D0-BF30-4063-9ADC-6426314F6132%7D.png">
