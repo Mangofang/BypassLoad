@@ -23,10 +23,11 @@
 
 ## 使用指南
 
-1. 将shellcode写入shellcode.txt然后运行Encrypt.exe进行加密编码（shellcode格式参照文件包内的shellcode.txt）
-2. 将Encrypt.exe加密编码后的数据上传至服务器
-3. 将远程访问链接写入webpath.txt
-4. 运行BypassLoad.exe
+1. 编译BypassLoad/Program.cs
+2. 将shellcode写入shellcode.txt然后运行Encrypt.exe进行加密编码（shellcode格式参照文件包内的shellcode.txt）
+3. 将Encrypt.exe加密编码后的数据上传至服务器
+4. 将远程访问链接写入webpath.txt
+5. 运行BypassLoad.exe
 
 注意：存在一段if判断内存是否小于4G，进行简单的反沙箱判断。
 
