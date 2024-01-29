@@ -21,7 +21,7 @@
 
 ## 使用指南
 
-1. 编译BypassLoad/Program.cs
+1. 编译BypassLoad和Encrypt
 2. 将shellcode写入shellcode.txt然后运行Encrypt.exe进行加密编码（shellcode格式参照文件包内的shellcode.txt）
 3. 将Encrypt.exe加密编码后的数据上传至服务器
 4. 将远程访问链接写入webpath.txt
