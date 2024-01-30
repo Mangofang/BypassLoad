@@ -4,7 +4,7 @@
 | shellcode | 360杀毒    | 火绒 | Defender | 腾讯电脑管家 | VT |
 | --------- | -----------| --- | -------  | ------------- |  --  |
 | Meterpreter  | √       |   √ |    √      | √           |  13/69  |
-| Cobalt Strike| 静态√   |   √ |    √      | √           |   13/69 |
+| Cobalt Strike| √   |   √ |    √      | √           |   13/69 |
 
 推荐Meterpreter生成shellcode，Cobalt Strike在尝试远程加载的shellcode时可能被360拦截
 
