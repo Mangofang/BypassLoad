@@ -156,7 +156,7 @@ namespace TCPMeterpreterProcess
         }
         public static byte[] HexStringToBytes(string hexString)
         {
-            hexString = hexString.Replace(" ", "").Replace("0x", "").Replace("0X", "").Replace("-", "").Replace(":", "").Replace(",", "").Replace("\x","").Replace("\X", "");
+            hexString = hexString.Replace(" ", "").Replace("0x", "").Replace("0X", "").Replace("-", "").Replace(":", "").Replace(",", "").Replace(@"\x","").Replace(@"\X", "");
             if (hexString.Length % 2 != 0)
                 throw new ArgumentException();
             return Enumerable.Range(0, hexString.Length / 2)
